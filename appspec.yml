@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/project/flutter-api
+    overwrite: yes
+
+hooks: # CodeDeploy배포 단계에서 실행할 명령어를 지정합니다.
+  ApplicationStart: # reload.sh를 root권한으로 실행합니다.
+    - location: ./reload.sh
+      timeout: 60 # 스크립트 실행 60초 이상 수행되면 실패가 됩니다.
+      runas: ubuntu
