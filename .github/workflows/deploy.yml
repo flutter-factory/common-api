@@ -1,0 +1,61 @@
+# name: production deploy CI
+
+# on:
+#   push:
+#     branches: [release/production]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [18.x]
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+
+#       - name: Install Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - uses: pnpm/action-setup@v2
+#         name: Install pnpm
+#         id: pnpm-install
+#         with:
+#           version: 7
+#           run_install: false
+
+#       - name: Get pnpm store directory
+#         id: pnpm-cache
+#         shell: bash
+#         run: |
+#           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+#       - uses: actions/cache@v3
+#         name: Setup pnpm cache
+#         with:
+#           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+#           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pnpm-store-
+#       - name: Install dependencies
+#         run: pnpm install
+
+#       - name: Build
+#         env:
+#           DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+#           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+#           DATABASE_USER: ${{ secrets.DATABASE_USER }}
+#           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+#         run: pnpm build
+
+#       - name: Deploy
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ap-northeast-2
+#         run: |
+#           zip -r ./dist.zip ./dist/* ./appspec.yml ./reload.sh ./package.json ./pnpm-lock.yaml
+#           aws s3 cp ./dist.zip s3://flutter-api/dist.zip
+#           aws deploy create-deployment --application-name flutter-api --deployment-group-name flutter-api --s3-location bucket=flutter-api,key=dist.zip,bundleType=zip
