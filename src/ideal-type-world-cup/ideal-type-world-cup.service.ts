@@ -9,7 +9,7 @@ import { IdealTypeWorldCup } from './entities/ideal-type-world-cup.entity';
 export class IdealTypeWorldCupService {
   constructor(
     @InjectRepository(IdealTypeWorldCup)
-    private idealTypeWorldCupRepository: Repository<IdealTypeWorldCup>
+    private idealTypeWorldCupRepository: Repository<IdealTypeWorldCup>,
   ) {}
 
   create(createIdealTypeWorldCupDto: CreateIdealTypeWorldCupDto) {

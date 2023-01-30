@@ -7,19 +7,23 @@ import { AppService } from './app.service';
 import { IdealTypeWorldCupModule } from './ideal-type-world-cup/ideal-type-world-cup.module';
 
 @Module({
-  imports: [IdealTypeWorldCupModule, ConfigModule.forRoot({
-    isGlobal: true,
-    load: [configuration]
-  }), TypeOrmModule.forRoot({
-    type: 'mysql',
-    port: 3306,
-    host: process.env.DATABASE_HOST,
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    synchronize: false,
-    autoLoadEntities: true,
-  })],
+  imports: [
+    IdealTypeWorldCupModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      port: 3306,
+      host: process.env.DATABASE_HOST,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
+      synchronize: false,
+      autoLoadEntities: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
