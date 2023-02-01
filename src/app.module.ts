@@ -5,6 +5,7 @@ import configuration from 'config/configuration';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { IdealTypeWorldCupModule } from './ideal-type-world-cup/ideal-type-world-cup.module';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -19,9 +20,9 @@ import { IdealTypeWorldCupModule } from './ideal-type-world-cup/ideal-type-world
       host: process.env.DATABASE_HOST,
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
       synchronize: false,
       autoLoadEntities: true,
+      namingStrategy: new SnakeNamingStrategy(),
     }),
   ],
   controllers: [AppController],

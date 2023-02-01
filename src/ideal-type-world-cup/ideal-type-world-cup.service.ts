@@ -21,7 +21,9 @@ export class IdealTypeWorldCupService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} idealTypeWorldCup`;
+    return this.idealTypeWorldCupRepository.find({
+      relations: ['IdealTypeItem'],
+    });
   }
 
   update(id: number, updateIdealTypeWorldCupDto: UpdateIdealTypeWorldCupDto) {

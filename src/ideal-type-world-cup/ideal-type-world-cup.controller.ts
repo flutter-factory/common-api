@@ -23,12 +23,12 @@ export class IdealTypeWorldCupController {
   }
 
   @Get()
-  findAll() {
+  idealTypeWorldCups() {
     return this.idealTypeWorldCupService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  idealTypeWorldCup(@Param('id') id: string) {
     return this.idealTypeWorldCupService.findOne(+id);
   }
 

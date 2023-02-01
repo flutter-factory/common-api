@@ -2,34 +2,39 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { WORLD_CUP_STATUS } from '../ideal-type-world-cup.type';
+import { IdealTypeItem } from './ideal-type-item.entity';
 
-@Entity('ideal_type_world_cup')
+@Entity({ database: 'ideal_type_world_cup', name: 'ideal_type_world_cup' })
 export class IdealTypeWorldCup {
-  @PrimaryGeneratedColumn({ name: 'ideal_type_world_cup_id' })
-  idealTypeWorldCupId: number;
+  @PrimaryGeneratedColumn()
+  idealTypeWorldCupId!: number;
 
-  @Column({ name: 'uid' })
-  uid: number;
+  @Column()
+  uid!: number;
 
-  @Column({ name: 'title', length: 50 })
-  title: string;
+  @Column({ length: 50 })
+  title!: string;
 
-  @Column({ name: 'title', length: 255 })
-  description: string;
+  @Column({ length: 255 })
+  description!: string;
 
   @Column({ name: 'status', type: 'enum', enum: WORLD_CUP_STATUS })
-  worldCupStatus: string;
+  worldCupStatus!: WORLD_CUP_STATUS;
 
-  @Column({ name: 'thumbnail_url' })
-  thumbnailUrl: string;
+  @Column()
+  thumbnailUrl!: string;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  @CreateDateColumn()
+  createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt!: Date;
+
+  @OneToMany(() => IdealTypeItem, (item) => item.idealTypeWorldCup)
+  idealTypeItems?: IdealTypeItem[];
 }
