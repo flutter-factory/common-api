@@ -21,6 +21,7 @@ specifiers:
   eslint-plugin-prettier: ^4.0.0
   jest: 29.3.1
   mysql2: ^3.0.1
+  nestjs-paginate: ^4.8.0
   prettier: ^2.3.2
   reflect-metadata: ^0.1.13
   rxjs: ^7.2.0
@@ -43,6 +44,7 @@ dependencies:
   '@nestjs/platform-express': 9.2.1_hjcqpoaebdr7gdo5hgc22hthbe
   '@nestjs/typeorm': 9.0.1_hkapd3a3mi37wyf4vtt5y4i2ye
   mysql2: 3.0.1
+  nestjs-paginate: 4.8.0_debnttsdnwxg2akl53jay2ioma
   reflect-metadata: 0.1.13
   rxjs: 7.8.0
   typeorm: 0.3.11_vi676j5qc66lrw5lu3uf7yadem
@@ -3793,6 +3795,19 @@ packages:
 
   /neo-async/2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  /nestjs-paginate/4.8.0_debnttsdnwxg2akl53jay2ioma:
+    resolution: {integrity: sha512-p+7s6p7YCP4L3xb5BTc7JgRsDrYE/uqCMscMyDOYzBeMFXLry9uAzwGE8NsjMUZDuXqHpttdfVwxHwVCq2ipEQ==}
+    peerDependencies:
+      '@nestjs/common': ^9.2.1
+      express: ^4.18.2
+      fastify: ^4.12.0
+      typeorm: ^0.3.11
+    dependencies:
+      '@nestjs/common': 9.2.1_mnr6j2del53muneqly5h4y27ai
+      lodash: 4.17.21
+      typeorm: 0.3.11_vi676j5qc66lrw5lu3uf7yadem
+    dev: false
 
   /node-abort-controller/3.0.1:
     resolution: {integrity: sha512-/ujIVxthRs+7q6hsdjHMaj8hRG9NuWmwrz+JdRwZ14jdFoKSkm+vDsCbF9PLpnSqjaWQJuTmVtcWHNLr+vrOFw==}

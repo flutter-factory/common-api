@@ -35,6 +35,6 @@ export class IdealTypeWorldCup {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @OneToMany(() => IdealTypeItem, (item) => item.idealTypeWorldCup)
+  // @OneToMany(() => IdealTypeItem, (item) => item.idealTypeWorldCup)
   idealTypeItems?: IdealTypeItem[];
 }

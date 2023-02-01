@@ -1,9 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import {
+  FilterOperator,
+  paginate,
+  Paginated,
+  PaginateQuery,
+} from 'nestjs-paginate';
 import { Repository } from 'typeorm';
 import { CreateIdealTypeWorldCupDto } from './dto/create-ideal-type-world-cup.dto';
 import { UpdateIdealTypeWorldCupDto } from './dto/update-ideal-type-world-cup.dto';
 import { IdealTypeWorldCup } from './entities/ideal-type-world-cup.entity';
+import { WORLD_CUP_STATUS } from './ideal-type-world-cup.type';
 
 @Injectable()
 export class IdealTypeWorldCupService {
@@ -16,8 +23,15 @@ export class IdealTypeWorldCupService {
     return 'This action adds a new idealTypeWorldCup';
   }
 
-  findAll() {
-    return this.idealTypeWorldCupRepository.find();
+  findAll(query: PaginateQuery): Promise<Paginated<IdealTypeWorldCup>> {
+    return paginate(query, this.idealTypeWorldCupRepository, {
+      sortableColumns: ['createdAt'],
+      searchableColumns: ['title', 'worldCupStatus'],
+      defaultSortBy: [['createdAt', 'DESC']],
+      where: {
+        worldCupStatus: WORLD_CUP_STATUS.ACTIVE,
+      },
+    });
   }
 
   findOne(id: number) {
