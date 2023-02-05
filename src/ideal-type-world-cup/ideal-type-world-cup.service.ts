@@ -27,7 +27,10 @@ export class IdealTypeWorldCupService {
     return paginate(query, this.idealTypeWorldCupRepository, {
       sortableColumns: ['createdAt'],
       searchableColumns: ['title', 'worldCupStatus'],
-      defaultSortBy: [['createdAt', 'DESC']],
+      defaultSortBy: [['idealTypeWorldCupId', 'ASC']],
+      filterableColumns: {
+        mediaType: [FilterOperator.EQ],
+      },
       where: {
         worldCupStatus: WORLD_CUP_STATUS.ACTIVE,
       },
@@ -35,8 +38,8 @@ export class IdealTypeWorldCupService {
   }
 
   findOne(id: number) {
-    return this.idealTypeWorldCupRepository.find({
-      relations: ['IdealTypeItem'],
+    return this.idealTypeWorldCupRepository.findOneBy({
+      idealTypeWorldCupId: id,
     });
   }
 
