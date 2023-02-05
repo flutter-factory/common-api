@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { WORLD_CUP_STATUS } from '../ideal-type-world-cup.type';
+import { MEDIA_TYPE, WORLD_CUP_STATUS } from '../ideal-type-world-cup.type';
 import { IdealTypeItem } from './ideal-type-item.entity';
 
 @Entity({ database: 'ideal_type_world_cup', name: 'ideal_type_world_cup' })
@@ -22,6 +22,9 @@ export class IdealTypeWorldCup {
 
   @Column({ length: 255 })
   description!: string;
+
+  @Column({ type: 'enum', enum: MEDIA_TYPE })
+  mediaType!: MEDIA_TYPE;
 
   @Column({ name: 'status', type: 'enum', enum: WORLD_CUP_STATUS })
   worldCupStatus!: WORLD_CUP_STATUS;
